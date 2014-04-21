@@ -25,4 +25,24 @@ public class DirectoriesTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testFilterGlobbing() {
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("D:/ray/Books"), "*.{rar}")) {
+			stream.forEach(path -> System.out.println(path));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testMyFilter() {
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(
+				Paths.get("D:/ray/Books"), 
+				path -> Files.isDirectory(path))) {
+			stream.forEach(path -> System.out.println(path));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
